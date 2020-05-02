@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <style type="text/css">
+        body{
+            margin: 0px;
+            background: grey;
+        }
+        .container{
+            width: 300px;
+            height: 300px;
+            margin-left: 650px;
+            margin-top: 300px;
+        }
+        #login{
+            margin-left: 70px;
+            border-radius: 30px;
+            cursor:pointer;
+            outline: none;
+        }
+        .ipt{
+            width: 200px;
+            height: 20px;
+            border-radius: 30px;
+            outline: none;
+        }
+        </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" class="ipt" id="username" placeholder="Username">
+        <br><br>
+        <input type="text" class="ipt" id="password" placeholder="Password">
+        <br><br>
+        <input type="button" value="login" id="login">
+    </div>
+<script>
+    $("#login").click(function () {
+        $.ajax({
+            url:"/ABCD/test",
+            data:{
+                username: $("#username").val(),
+                password: $("#password").val()
+            },
+            success: function (res) {
+                if (res == "OK"){
+                    window.location.href="http://localhost/ABCD/success.html"
+                }else if (res == "--") {
+                    alert("账号或密码错误");
+                }
+            }
+        })
+    });
+    window.onload=function () {
+        $.ajax({
+            url:"/ABCD/check",
+            success:function (res) {
+                if(res === "OK"){
+                    window.location.href="http://localhost/ABCD/success.html"
+                }else{
+                    alert("请先登陆");
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>
